@@ -1,0 +1,28 @@
+<h2>Books</h2>
+
+{{#if books.length}}
+<div class="allbooks">
+    {{#each books}}
+  <div class="row">
+    <div class="col s12 m9">
+      <div class="card">
+        <div class="card-image">
+          <img src={{imgUrl}}>
+          <span class="card-title">{{title}}</span>
+        </div>
+        <div class="card-content">
+            <p class="price">{{price}}</p>
+        </div>
+        <div class="card-action">
+          <a href="/books/{{id}}" target="_blank">Go to Book</a>
+          <a href="/books/{{id}}/edit?allow=true">Edit Book</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+{{else}}
+<p>there is no books yet</p>
+{{/if}}

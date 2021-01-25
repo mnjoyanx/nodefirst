@@ -1,0 +1,27 @@
+<h2>Edit Book</h2>
+
+
+<form action="/books/edit" method="POST">
+    <div class="input-field col s6">
+        <input id="title" name="title" type="text" value="{{book.title}}" class="validate" required>
+        <label for="title">Book Tile</label>
+        <span class="helper-text" data-error="title field is required"></span>
+    </div>
+    
+ <div class="input-field col s6">
+        <input id="price" name="price" type="number" min="1" value="{{book.price}}" class="validate" required>
+        <label for="title" class="active">Book Price</label>
+        <span class="helper-text" data-error="price field is required" ></span>
+    </div>
+
+    <div class="input-field col s6">    
+        <input id="url" name="imgUrl" type="text" class="validate" value="{{book.imgUrl}}" required>
+        <label for="url">Img Url</label>
+        <span class="helper-text" data-error="img url field is required"></span>
+    </div>
+
+    <input type="hidden" value="{{book.id}}" name="id">
+    <button class="btn waves-effect waves-light" type="submit">Submit
+        <i class="material-icons right">send</i>
+    </button> 
+</form>

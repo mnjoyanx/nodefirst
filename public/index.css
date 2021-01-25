@@ -1,0 +1,12 @@
+.navwrapper {
+    padding: 0 2rem;
+}
+
+.allbooks {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bookfirst {
+    width: 300px;
+}
