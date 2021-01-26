@@ -7,6 +7,7 @@ const app = express()
 const home = require('./routes/home')
 const books = require('./routes/books')
 const addBook = require('./routes/addbook')
+const cart = require('./routes/cart')
 
 // handlebars configuration
 const hbs = exphbs.create({
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/', home)
 app.use('/books', books)
 app.use('/addbook', addBook)
+app.use('/cart', cart)
 
 
 // Create server

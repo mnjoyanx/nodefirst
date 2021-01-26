@@ -29,6 +29,7 @@ router.post('/edit', async(req, res) => {
     res.redirect('/books')
 })
 
+
 router.get('/:id', async(req, res) => {
     const book = await Books.currentBook(req.params.id)
     res.render('book', {
