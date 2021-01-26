@@ -7,15 +7,15 @@
     <div class="col s12 m9">
       <div class="card">
         <div class="card-image">
-          <img src={{imgUrl}}>
+          <img src="{{imgUrl}}">
           <span class="card-title">{{title}}</span>
         </div>
         <div class="card-content">
             <p class="price">{{price}}</p>
         </div>
         <div class="card-action">
-          <a href="/books/{{id}}" target="_blank">Go to Book</a>
-          <a href="/books/{{id}}/edit?allow=true">Edit Book</a>
+          <a href="/books/{{_id}}" target="_blank">Go to Book</a>
+          <a href="/books/{{_id}}/edit?allow=true">Edit Book</a>
           <form action="/cart/add" method="POST">
           <input type="hidden" name="id" value="{{id}}">
             <button class="btn" >Add Book</button>

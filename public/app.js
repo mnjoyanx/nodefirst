@@ -18,7 +18,6 @@ if ($cart) {
                 }).then(res => res.json())
                 .then(cart => {
                     if (cart.books.length) {
-                        console.log();
                         const html = cart.books.map(c => {
                             return `
                                 <tr>

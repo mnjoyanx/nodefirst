@@ -13,11 +13,16 @@ router.get('/', (req, res) => {
 router.post('/', async(req, res) => {
 
     const { title, price, imgUrl } = req.body
-    const books = new Books(title, price, imgUrl)
+    const books = new Books({ title, price, imgUrl })
 
-    await books.save()
+    try {
+        await books.save()
+        res.redirect('/books')
+    } catch (err) {
+        console.log(err)
+    }
 
-    res.redirect('/')
+
 })
 
 

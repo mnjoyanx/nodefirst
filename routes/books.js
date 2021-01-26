@@ -4,7 +4,7 @@ const Books = require('../models/books')
 const router = Router()
 
 router.get('/', async(req, res) => {
-    const books = await Books.getAll()
+    const books = await Books.find().lean()
     res.render('books', {
         title: 'Books',
         isBooks: true,
@@ -13,10 +13,10 @@ router.get('/', async(req, res) => {
 })
 
 router.get('/:id/edit', async(req, res) => {
-    const book = await Books.currentBook(req.params.id)
     if (!req.query.allow) {
         return res.redirect('/')
     }
+    const book = await Books.findById(req.params.id).lean()
 
     res.render('edit', {
         title: `Edit ${book.title}`,
@@ -25,13 +25,13 @@ router.get('/:id/edit', async(req, res) => {
 })
 
 router.post('/edit', async(req, res) => {
-    await Books.update(req.body)
+    await Books.findByIdAndUpdate(req.body.id, req.body)
     res.redirect('/books')
 })
 
 
 router.get('/:id', async(req, res) => {
-    const book = await Books.currentBook(req.params.id)
+    const book = await Books.findById(req.params.id).lean()
     res.render('book', {
         title: book.title,
         layout: 'empty',
