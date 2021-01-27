@@ -25,3 +25,8 @@
         <i class="material-icons right">send</i>
     </button> 
 </form>
+
+<form action="/books/removeOne" method="POST">
+    <input type="hidden" name="_id" value="{{book._id}}">
+    <button class="btn danger">Delete</button>
+</form>

@@ -22,7 +22,7 @@ app.set('views', 'views')
 
 
 // Static files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true }))
 
@@ -41,6 +41,7 @@ async function start() {
     try {
         const url = `mongodb+srv://mnjoyan:6vyyaEwUKcs5Lijx@cluster0.fzswx.mongodb.net/test?retryWrites=true&w=majority`
         await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+            // await mongoose.set('useFindAndModify', false);
         app.listen(3500, () => {
             console.log(`server is running on port 3500`);
         })
