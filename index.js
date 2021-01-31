@@ -4,6 +4,8 @@ const path = require('path')
 const exphbs = require('express-handlebars')
 const app = express()
 
+const User = require('./models/user')
+
 //import routes
 const home = require('./routes/home')
 const books = require('./routes/books')
@@ -41,11 +43,22 @@ async function start() {
     try {
         const url = `mongodb+srv://mnjoyan:6vyyaEwUKcs5Lijx@cluster0.fzswx.mongodb.net/test?retryWrites=true&w=majority`
         await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-            // await mongoose.set('useFindAndModify', false);
+        await mongoose.set('useFindAndModify', false);
+
+        const candidate = await User.findOne()
+
+        if(!candidate) {
+            const user = new User({
+                email: 'tigranmnjoyan@gmail.com',
+                name: 'Tigran',
+                cart: {items: []}
+            })
+            user.save()
+        }
+
         app.listen(3500, () => {
             console.log(`server is running on port 3500`);
         })
-
     } catch (err) {
         console.log(err, 'errrr');
     }
