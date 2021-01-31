@@ -5,13 +5,14 @@ const Cart = require('../models/cart')
 const Books = require('../models/books')
 
 router.get('/', async(req, res) => {
-    const cart = await Cart.fetch()
-    res.render('cart', {
-        title: 'Cart',
-        isCart: true,
-        price: cart.price,
-        books: cart.books
-    })
+    // const cart = await Cart.fetch()
+    // res.render('cart', {
+    //     title: 'Cart',
+    //     isCart: true,
+    //     price: cart.price,
+    //     books: cart.books
+    // })
+    res.json({test: true})
 })
 
 router.delete('/remove/:id', async(req, res) => {
@@ -20,8 +21,9 @@ router.delete('/remove/:id', async(req, res) => {
 })
 
 router.post('/add', async(req, res) => {
-    const book = await Books.currentBook(req.body.id)
-    await Cart.add(book)
+
+    const book = await Books.findById(req.body.id)
+    await req.user.addToCart(book)
     res.redirect('/books')
 
 })

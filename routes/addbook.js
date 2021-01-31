@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.post('/', async(req, res) => {
 
     const { title, price, imgUrl } = req.body
-    const books = new Books({ title, price, imgUrl })
+    const books = new Books({ title, price, imgUrl, userId: req.user._id })
 
     try {
         await books.save()

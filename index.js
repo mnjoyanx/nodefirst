@@ -23,6 +23,17 @@ app.set('view engine', 'hbs')
 app.set('views', 'views')
 
 
+// single user
+app.use(async (req, res, next) => {
+    try {
+        const user = await User.findById('6016c1256562829a4488cd1a')
+        req.user = user
+        next()
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -35,13 +46,13 @@ app.use('/addbook', addBook)
 app.use('/cart', cart)
 
 
-
 // Create server
-
-
 async function start() {
     try {
-        const url = `mongodb+srv://mnjoyan:6vyyaEwUKcs5Lijx@cluster0.fzswx.mongodb.net/test?retryWrites=true&w=majority`
+
+        const url = `mongodb+srv://mnjoyan:jcGYOfS6hvfKyAwE@cluster0.sc0pu.mongodb.net/bookstore?retryWrites=true&w=majority`
+
+
         await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
         await mongoose.set('useFindAndModify', false);
 
@@ -49,11 +60,11 @@ async function start() {
 
         if(!candidate) {
             const user = new User({
-                email: 'tigranmnjoyan@gmail.com',
+                email: 'tigranmnjoyan@gmail.coms',
                 name: 'Tigran',
                 cart: {items: []}
             })
-            user.save()
+            await user.save()
         }
 
         app.listen(3500, () => {
