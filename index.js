@@ -50,7 +50,7 @@ app.use('/cart', cart)
 async function start() {
     try {
 
-        const url = `mongodb+srv://mnjoyan:jcGYOfS6hvfKyAwE@cluster0.sc0pu.mongodb.net/bookstore?retryWrites=true&w=majority`
+        const url = `mongodb+srv://mnjoyan:ts4oOXHM982kfcrd@cluster0.sc0pu.mongodb.net/bookstore?retryWrites=true&w=majority`
 
 
         await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -60,7 +60,7 @@ async function start() {
 
         if(!candidate) {
             const user = new User({
-                email: 'tigranmnjoyan@gmail.coms',
+                email: 'tigranmnjoyan@gmail.com',
                 name: 'Tigran',
                 cart: {items: []}
             })
@@ -71,7 +71,7 @@ async function start() {
             console.log(`server is running on port 3500`);
         })
     } catch (err) {
-        console.log(err, 'errrr');
+        console.log(err);
     }
 
 }

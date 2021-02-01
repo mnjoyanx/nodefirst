@@ -1,18 +1,33 @@
 const { Router } = require('express')
+const User = require('../models/user')
 const router = Router()
 
 const Cart = require('../models/cart')
 const Books = require('../models/books')
 
+
+const mapCartItems = cart => {
+    return cart.items.map(item => ({
+        ...item.bookId._doc, count: item.count
+    }))
+}
 router.get('/', async(req, res) => {
-    // const cart = await Cart.fetch()
-    // res.render('cart', {
-    //     title: 'Cart',
-    //     isCart: true,
-    //     price: cart.price,
-    //     books: cart.books
-    // })
-    res.json({test: true})
+    
+
+    const user = await req.user
+    .populate('cart.items.bookId')
+    .execPopulate()
+
+    const book = mapCartItems(user.cart)
+
+    console.log(book, 'this is book')
+
+    res.render('cart', {
+        title: book.title,
+        isCart: true,
+        price: book.price,
+        book
+    })
 })
 
 router.delete('/remove/:id', async(req, res) => {
